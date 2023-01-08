@@ -2,13 +2,7 @@ use chrono::NaiveDate;
 use mongodb::bson::oid::ObjectId;
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Song {
-    #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<ObjectId>,
-    pub name: String,
-    pub length_secs: i64,
-}
+pub mod song;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Album {

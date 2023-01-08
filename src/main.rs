@@ -12,13 +12,13 @@ fn rocket() -> _ {
     let db = MongoRepo::init();
     rocket::build()
         .mount(
-            "/",
+            "/song",
             routes![
-                api::create_song,
-                api::get_song,
-                api::update_song,
-                api::delete_song,
-                api::get_all_songs,
+                api::song_api::create_song,
+                api::song_api::get_song,
+                api::song_api::update_song,
+                api::song_api::delete_song,
+                api::song_api::get_all_songs,
             ],
         )
         .manage(db)
