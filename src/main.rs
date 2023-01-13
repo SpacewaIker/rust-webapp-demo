@@ -1,6 +1,8 @@
-mod api;
+pub mod api;
 mod migrator;
 mod entities;
+
+#[cfg(test)] mod tests;
 
 #[macro_use]
 extern crate rocket;
@@ -11,7 +13,6 @@ use sea_orm_migration::prelude::{SchemaManager, MigratorTrait};
 use std::env;
 
 pub async fn set_up_db() -> DatabaseConnection {
-    dotenv().ok();
     let url = match env::var("POSTGRES_URL") {
         Ok(v) => v.to_string(),
         Err(_) => format!("Error loading env variable"),
@@ -21,6 +22,8 @@ pub async fn set_up_db() -> DatabaseConnection {
 
 #[launch]
 async fn rocket() -> _ {
+    dotenv().ok();
+
     let db = set_up_db().await;
 
     let schema_manager = SchemaManager::new(&db);
@@ -40,6 +43,18 @@ async fn rocket() -> _ {
                 api::song_api::update_song,
                 api::song_api::delete_song,
                 api::song_api::get_all_songs,
+            ],
+        )
+        .mount(
+            "/album",
+            routes![
+                api::album_api::create_album,
+                api::album_api::get_album_by_id,
+                api::album_api::update_album,
+                api::album_api::add_artist,
+                api::album_api::remove_artist,
+                api::album_api::delete_album,
+                api::album_api::get_all_albums,
             ],
         )
 }

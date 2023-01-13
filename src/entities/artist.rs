@@ -2,14 +2,19 @@
 
 use super::sea_orm_active_enums::Genre;
 use sea_orm::entity::prelude::*;
+use serde::{Serialize, Deserialize};
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq)]
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "artist")]
 pub struct Model {
     #[sea_orm(primary_key)]
+    #[serde(skip_deserializing)]
     pub id: i32,
+    /// Non-empty artist name
     pub name: String,
+    /// Date of artist formation
     pub date_formed: Date,
+    /// Artist genre
     pub genre: Option<Genre>,
 }
 

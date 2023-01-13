@@ -1,5 +1,5 @@
-use sea_orm_migration::prelude::*;
 use sea_orm_migration::prelude::extension::postgres::Type;
+use sea_orm_migration::prelude::*;
 
 pub struct Migration;
 
@@ -16,7 +16,13 @@ impl MigrationTrait for Migration {
             .create_type(
                 Type::create()
                     .as_enum(Genre::Genre)
-                    .values([Genre::Rock, Genre::Pop, Genre::Jazz])
+                    .values([
+                        Genre::Metal,
+                        Genre::Classical,
+                        Genre::Rock,
+                        Genre::Pop,
+                        Genre::Jazz,
+                    ])
                     .to_owned(),
             )
             .await?;
@@ -34,7 +40,16 @@ impl MigrationTrait for Migration {
                     )
                     .col(ColumnDef::new(Artist::Name).string().not_null())
                     .col(ColumnDef::new(Artist::DateFormed).date().not_null())
-                    .col(ColumnDef::new(Artist::Genre).enumeration("genre", vec!["rock", "pop", "jazz"]))
+                    .col(ColumnDef::new(Artist::Genre).enumeration(
+                        Genre::Genre,
+                        vec![
+                            Genre::Metal,
+                            Genre::Classical,
+                            Genre::Rock,
+                            Genre::Pop,
+                            Genre::Jazz,
+                        ],
+                    ))
                     .to_owned(),
             )
             .await
@@ -53,6 +68,8 @@ impl MigrationTrait for Migration {
 #[derive(Iden)]
 pub enum Genre {
     Genre,
+    Metal,
+    Classical,
     Rock,
     Pop,
     Jazz,

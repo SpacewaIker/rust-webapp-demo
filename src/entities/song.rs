@@ -9,7 +9,9 @@ pub struct Model {
     #[sea_orm(primary_key)]
     #[serde(skip_deserializing)]
     pub id: i32,
+    /// Non-empty song name
     pub name: String,
+    /// Non-zero, positive song length in seconds
     pub length_secs: i32,
     pub album_id: i32,
 }
