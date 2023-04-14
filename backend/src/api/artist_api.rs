@@ -1,5 +1,5 @@
-use entities::{artist, prelude::*};
 use chrono::Local;
+use entities::{artist, prelude::*};
 use rocket::{http::Status, serde::json::Json, State};
 use sea_orm::{ActiveModelTrait, ActiveValue, DatabaseConnection, EntityTrait};
 
@@ -21,6 +21,7 @@ pub async fn create_artist(
     let new_artist = artist::ActiveModel {
         name: ActiveValue::Set(artist.name.to_owned()),
         date_formed: ActiveValue::Set(artist.date_formed),
+        genre: ActiveValue::Set(artist.genre.to_owned()),
         ..Default::default()
     };
 
