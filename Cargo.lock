@@ -293,6 +293,7 @@ version = "0.1.0"
 dependencies = [
  "chrono",
  "dotenv",
+ "entities",
  "futures",
  "rocket",
  "sea-orm",
@@ -808,6 +809,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "entities"
+version = "0.1.0"
+dependencies = [
+ "sea-orm",
+ "serde",
+]
+
+[[package]]
 name = "event-listener"
 version = "2.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -870,6 +879,7 @@ dependencies = [
 name = "frontend"
 version = "0.1.0"
 dependencies = [
+ "entities",
  "gloo-net",
  "serde",
  "wasm-bindgen-futures",

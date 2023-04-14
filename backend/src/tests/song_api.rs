@@ -1,7 +1,7 @@
 use crate::api::song_api::*;
 use rocket::{local::blocking::Client, Build, Rocket, http::Status};
 use sea_orm::{DatabaseBackend, MockDatabase};
-use crate::entities::song;
+use entities::song;
 
 // #[ctor::ctor]
 fn setup_backend() -> Rocket<Build> {

@@ -1,4 +1,4 @@
-use crate::entities::{album, album_artist_mtm, artist, prelude::*};
+use entities::{album, album_artist_mtm, artist, prelude::*};
 use chrono::Local;
 use rocket::{http::Status, serde::json::Json, State};
 use sea_orm::{

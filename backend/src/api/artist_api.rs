@@ -1,4 +1,4 @@
-use crate::entities::{artist, prelude::*};
+use entities::{artist, prelude::*};
 use chrono::Local;
 use rocket::{http::Status, serde::json::Json, State};
 use sea_orm::{ActiveModelTrait, ActiveValue, DatabaseConnection, EntityTrait};

@@ -1,4 +1,4 @@
-use crate::entities::{prelude::*, song};
+use entities::{prelude::*, song};
 use rocket::{http::Status, serde::json::Json, State};
 use sea_orm::{ActiveModelTrait, ActiveValue, DatabaseConnection, EntityTrait};
 

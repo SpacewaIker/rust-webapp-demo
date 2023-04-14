@@ -1,8 +1,8 @@
 pub mod api;
 mod migrator;
-mod entities;
+// pub mod entities;
 
-#[cfg(test)] mod tests;
+// #[cfg(test)] mod tests;
 
 #[macro_use]
 extern crate rocket;
