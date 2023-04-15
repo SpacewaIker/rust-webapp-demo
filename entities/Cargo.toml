@@ -7,4 +7,12 @@ edition = "2021"
 
 [dependencies]
 serde = "1.0.136"
-sea-orm = {version = "0.10.6", features = ["sqlx-postgres", "runtime-async-std-native-tls", "macros", "mock", "tests-cfg"]}
+
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+sea-orm = { version = "0.10.6", features = [
+  "sqlx-postgres",
+  "runtime-async-std-native-tls",
+  "macros",
+  "mock",
+  "tests-cfg",
+] }
