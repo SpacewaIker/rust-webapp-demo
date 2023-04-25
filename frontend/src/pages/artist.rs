@@ -1,8 +1,6 @@
 use entities::artist::Model as Artist;
-use gloo_console::log;
 use gloo_net::http::Request;
 use yew::prelude::*;
-use yew_hooks::use_mount;
 
 #[derive(Clone, PartialEq, Properties)]
 pub struct Props {
@@ -21,19 +19,22 @@ pub fn artist_page(props: &Props) -> Html {
     {
         let id = props.id;
         let artist = artist.clone();
-        use_mount(move || {
-            wasm_bindgen_futures::spawn_local(async move {
-                let resp = Request::get(&format!("/api/artist/{}", id))
-                    .send()
-                    .await
-                    .expect("Failed to send request")
-                    .json::<Artist>()
-                    .await
-                    .expect("Failed to parse response");
+        use_effect_with_deps(
+            move |_| {
+                wasm_bindgen_futures::spawn_local(async move {
+                    let resp = Request::get(&format!("/api/artist/{}", id))
+                        .send()
+                        .await
+                        .expect("Failed to send request")
+                        .json::<Artist>()
+                        .await
+                        .expect("Failed to parse response");
 
-                artist.set(resp);
-            })
-        });
+                    artist.set(resp);
+                })
+            },
+            (),
+        );
     }
 
     html! {
