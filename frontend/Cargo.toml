@@ -13,3 +13,4 @@ wasm-bindgen-futures = "0.4"
 entities = { path = "../entities" }
 yew-router = "0.17.0"
 gloo-console = "0.2"
+stylist = { version = "0.12", features = ["yew_integration"] }
