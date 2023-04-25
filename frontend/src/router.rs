@@ -8,11 +8,15 @@ pub enum Route {
     Home,
     #[at("/artist/:id")]
     Artist { id: u32 },
+    #[not_found]
+    #[at("/404")]
+    NotFound,
 }
 
 pub fn switch(route: Route) -> Html {
     match route {
         Route::Home => html! { "Home" },
         Route::Artist { id } => html! { <ArtistPage id={id} /> },
+        Route::NotFound => html! { "Not found" },
     }
 }
