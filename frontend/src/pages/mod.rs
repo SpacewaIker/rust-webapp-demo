@@ -1,11 +1,23 @@
+mod album_artist_create;
+mod album_create;
+mod album_edit;
 mod albums;
-mod artist;
+mod artist_create;
+mod artist_edit;
 mod artists;
 mod home;
+mod song_create;
+mod song_edit;
 mod songs;
 
+pub use album_artist_create::AlbumArtistCreate;
+pub use album_create::AlbumCreate;
+pub use album_edit::AlbumEdit;
 pub use albums::AlbumsPage;
-pub use artist::ArtistPage;
+pub use artist_create::ArtistCreate;
+pub use artist_edit::ArtistEdit;
 pub use artists::ArtistsPage;
 pub use home::HomePage;
+pub use song_create::SongCreate;
+pub use song_edit::SongEdit;
 pub use songs::SongsPage;

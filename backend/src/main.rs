@@ -29,7 +29,7 @@ async fn rocket() -> _ {
     let db = set_up_db().await;
 
     let schema_manager = SchemaManager::new(&db);
-    migrator::Migrator::refresh(&db).await.unwrap();
+    migrator::Migrator::up(&db, None).await.unwrap();
     assert!(schema_manager.has_table("song").await.unwrap());
     assert!(schema_manager.has_table("album").await.unwrap());
     assert!(schema_manager.has_table("artist").await.unwrap());
@@ -58,6 +58,7 @@ async fn rocket() -> _ {
                 api::album_api::add_artist,
                 api::album_api::get_artists,
                 api::album_api::remove_artist,
+                api::album_api::get_songs,
             ],
         )
         .mount(
@@ -68,6 +69,7 @@ async fn rocket() -> _ {
                 api::artist_api::update_artist,
                 api::artist_api::delete_artist,
                 api::artist_api::get_all_artists,
+                api::artist_api::get_albums,
             ],
         )
 }

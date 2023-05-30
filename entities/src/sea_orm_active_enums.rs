@@ -2,6 +2,7 @@
 
 #[cfg(target_family = "wasm")]
 use std::fmt::Display;
+use std::str::FromStr;
 
 #[cfg(not(target_family = "wasm"))]
 use sea_orm::entity::prelude::*;
@@ -50,6 +51,21 @@ impl Display for Genre {
             Self::Jazz => write!(f, "Jazz"),
             Self::Pop => write!(f, "Pop"),
             Self::Rock => write!(f, "Rock"),
+        }
+    }
+}
+
+impl FromStr for Genre {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.trim().to_lowercase().as_str() {
+            "metal" => Ok(Self::Metal),
+            "classical" => Ok(Self::Classical),
+            "jazz" => Ok(Self::Jazz),
+            "pop" => Ok(Self::Pop),
+            "rock" => Ok(Self::Rock),
+            _ => Err(()),
         }
     }
 }

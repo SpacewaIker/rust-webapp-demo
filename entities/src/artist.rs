@@ -16,7 +16,7 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(not(target_family = "wasm"), sea_orm(table_name = "artist"))]
 pub struct Model {
     #[cfg_attr(not(target_family = "wasm"), sea_orm(primary_key))]
-    #[serde(skip_deserializing)]
+    #[cfg_attr(not(target_family = "wasm"), serde(skip_deserializing))]
     pub id: i32,
     /// Non-empty artist name
     pub name: String,

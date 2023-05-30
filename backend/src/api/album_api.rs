@@ -1,5 +1,5 @@
-use entities::{album, album_artist_mtm, artist, prelude::*};
 use chrono::Local;
+use entities::{album, album_artist_mtm, artist, prelude::*, song};
 use rocket::{http::Status, serde::json::Json, State};
 use sea_orm::{
     ActiveModelTrait, ActiveValue, ColumnTrait, DatabaseConnection, EntityTrait, QueryFilter,
@@ -308,4 +308,22 @@ pub async fn remove_artist(
 
     info!("Deleted {} album-artist relations", res.rows_affected);
     Ok((Status::Ok, id.to_string()))
+}
+
+/// Get all songs of an album
+#[get("/songs/<id>")]
+pub async fn get_songs(
+    db: &State<DatabaseConnection>,
+    id: i32,
+) -> Result<(Status, Json<Vec<song::Model>>), (Status, &str)> {
+    let db = db as &DatabaseConnection;
+
+    let songs = Song::find()
+        .filter(song::Column::AlbumId.eq(id))
+        .all(db)
+        .await
+        .map_err(|_| (Status::InternalServerError, "Error fetching songs in DB"))?;
+
+    info!("Found {} songs", songs.len());
+    Ok((Status::Found, Json(songs)))
 }

@@ -2,12 +2,17 @@
 
 #[cfg(not(target_family = "wasm"))]
 use sea_orm::entity::prelude::*;
+#[cfg(target_family = "wasm")]
+use serde::{Deserialize, Serialize};
 
 #[cfg_attr(
     not(target_family = "wasm"),
     derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq)
 )]
-#[cfg_attr(target_family = "wasm", derive(Clone, Debug, PartialEq, Eq))]
+#[cfg_attr(
+    target_family = "wasm",
+    derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)
+)]
 #[cfg_attr(not(target_family = "wasm"), sea_orm(table_name = "album_artist_mtm"))]
 pub struct Model {
     #[cfg_attr(not(target_family = "wasm"), sea_orm(primary_key))]

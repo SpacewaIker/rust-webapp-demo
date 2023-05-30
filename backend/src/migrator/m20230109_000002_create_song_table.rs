@@ -31,7 +31,8 @@ impl MigrationTrait for Migration {
                         ForeignKey::create()
                             .name("fk-song-album_id")
                             .from(Song::Table, Song::AlbumId)
-                            .to(Album::Table, Album::Id),
+                            .to(Album::Table, Album::Id)
+                            .on_delete(ForeignKeyAction::Cascade),
                     )
                     .to_owned(),
             )
@@ -53,3 +54,4 @@ pub enum Song {
     LengthSecs,
     AlbumId,
 }
+

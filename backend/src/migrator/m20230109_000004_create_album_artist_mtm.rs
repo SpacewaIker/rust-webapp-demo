@@ -35,13 +35,15 @@ impl MigrationTrait for Migration {
                         ForeignKey::create()
                             .name("fk-album_artist_mtm-album_id")
                             .from(AlbumArtistMtm::Table, AlbumArtistMtm::AlbumId)
-                            .to(Album::Table, Album::Id),
+                            .to(Album::Table, Album::Id)
+                            .on_delete(ForeignKeyAction::Cascade),
                     )
                     .foreign_key(
                         ForeignKey::create()
                             .name("fk-album_artist_mtm-artist_id")
                             .from(AlbumArtistMtm::Table, AlbumArtistMtm::ArtistId)
-                            .to(Artist::Table, Artist::Id),
+                            .to(Artist::Table, Artist::Id)
+                            .on_delete(ForeignKeyAction::Cascade),
                     )
                     .to_owned(),
             )
