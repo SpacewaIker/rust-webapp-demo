@@ -1,5 +1,6 @@
 use crate::components::{AlbumView, ArtistView};
 use crate::pages::*;
+use stylist::css;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -59,6 +60,10 @@ pub fn switch(route: Route) -> Html {
         Route::SongEdit { id } => html! { <SongEdit id={id} /> },
         Route::Songs => html! { <SongsPage /> },
 
-        Route::NotFound => html! { "Not found" },
+        Route::NotFound => html! {
+            <div class={ css!("margin: 10px;") }>
+                { "Uh-oh... Looks like you took a wrong turn!" }
+            </div>
+        },
     }
 }
