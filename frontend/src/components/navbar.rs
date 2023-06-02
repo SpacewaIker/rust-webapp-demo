@@ -18,6 +18,28 @@ pub fn navbar() -> Html {
         })
     };
 
+    {
+        let theme = theme.clone();
+        use_effect_with_deps(
+            move |_| {
+                let window = web_sys::window().unwrap();
+                let document = window.document().unwrap();
+                let theme = theme.clone();
+                let theme_style = theme.get_theme();
+
+                let html = document.get_elements_by_tag_name("html").item(0);
+                if let Some(html) = html {
+                    html.set_attribute(
+                        "style",
+                        &format!("background-color: {}", theme_style.background),
+                    )
+                    .expect("Failed to set attribute");
+                }
+            },
+            (),
+        );
+    }
+
     let style = {
         let theme = theme.clone();
         let theme_style = theme.get_theme();
