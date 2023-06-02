@@ -137,8 +137,8 @@ pub fn artist_view(props: &Props) -> Html {
             }
 
             a {
-                margin: 0 10px;
                 text-decoration: none;
+                color: ${on_surface};
             }
 
             ul {
@@ -161,6 +161,14 @@ pub fn artist_view(props: &Props) -> Html {
         surface = theme_style.surface,
         on_surface = theme_style.on_surface,
         outline = theme_style.outline,
+    );
+
+    let title_style = use_style!(
+        r#"
+            margin: 0.67em 0;
+            font-size: 2em;
+            font-weight: bold;
+        "#
     );
 
     let edit_style = use_style!(
@@ -221,7 +229,7 @@ pub fn artist_view(props: &Props) -> Html {
     html! {
         <div class={ style }>
             <div>
-                <h1>{ &*artist.name }</h1>
+                <Link<Route> classes={ title_style } to={ Route::Artist { id: props.id } }>{ &*artist.name }</Link<Route>>
                 <p>{ "Genre: " } { &*artist.genre.as_ref().map_or("Unknown".to_string(), |g| g.to_string()) }</p>
                 <p>{ "Date formed: " } { &*artist.date_formed }</p>
                 <span>

@@ -168,7 +168,7 @@ pub fn album_view(props: &Props) -> Html {
             }
 
             a {
-                padding: 5px 10px;
+                padding: 5px 20px;
                 text-decoration: none;
                 color: ${on_surface};
             }
@@ -193,6 +193,14 @@ pub fn album_view(props: &Props) -> Html {
         surface = theme_style.surface,
         on_surface = theme_style.on_surface,
         outline = theme_style.outline,
+    );
+
+    let title_style = use_style!(
+        r#"
+            margin: 0.67em 0;
+            font-size: 2em;
+            font-weight: bold;
+        "#,
     );
 
     let edit_style = use_style!(
@@ -259,7 +267,7 @@ pub fn album_view(props: &Props) -> Html {
     html! {
         <div class={style}>
             <div>
-                <h1>{ &album.name }</h1>
+                <Link<Route> classes={ title_style } to={ Route::Album { id: props.id } }>{ &album.name }</Link<Route>>
                 <p>{ &album.date_published }</p>
                 <span>
                     <button onclick={ edit } class={ edit_style }>{ "Edit" }</button>
