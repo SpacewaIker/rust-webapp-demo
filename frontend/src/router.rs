@@ -38,8 +38,6 @@ pub enum Route {
     #[not_found]
     #[at("/404")]
     NotFound,
-    #[at("/test")]
-    Test,
 }
 
 pub fn switch(route: Route) -> Html {
@@ -62,8 +60,5 @@ pub fn switch(route: Route) -> Html {
         Route::Songs => html! { <SongsPage /> },
 
         Route::NotFound => html! { "Not found" },
-        Route::Test => html! {
-            <AlbumView id={1} />
-        },
     }
 }
