@@ -40,32 +40,32 @@ The actual application I chose to make (which is more of a pretext than anything
 ### Songs page
 
 View all the songs in the database.
-![Songs page](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/songs_page.png)
+![Songs page](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/screenshots/songs_page.png)
 
 ### Albums page
 
 View all the albums in the database.
-![Albums page](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/albums_page.png)
+![Albums page](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/screenshots/albums_page.png)
 
 ### Artists page
 
 View all the artists in the database.
-![Artists page](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/artists_page.png)
+![Artists page](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/screenshots/artists_page.png)
 
 ### Create artist
 
 Page to create a new artist.
-![Create artist](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/create_artist.png)
+![Create artist](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/screenshots/create_artist.png)
 
 ### Edit artist
 
 Page to edit the attributes of an artist currently in the database.
-![Edit artist](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/edit_artist.png)
+![Edit artist](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/screenshots/edit_artist.png)
 
 ### Artist details
 
 Page that shows all the details related to an artist, including its attributes and its discography.
-![Artist details](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/artist_details.png)
+![Artist details](https://raw.githubusercontent.com/SpacewaIker/rust-webapp-demo/main/screenshots/artist_details.png)
 
 ## How to run the app
 
