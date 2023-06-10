@@ -1,0 +1,38 @@
+services:
+  frontend:
+    container_name: rustwebappfrontend
+    image: rust:1.67
+    depends_on:
+      - backend
+    command: sh -c "
+      cargo install --locked trunk
+      && rustup target add wasm32-unknown-unknown
+      && trunk serve --release --proxy-rewrite=/api/ --proxy-backend=http://rustwebappbackend:8000/"
+    ports:
+      - 8080:8080
+    working_dir: /rust-webapp-demo/frontend
+    volumes:
+      - ./:/rust-webapp-demo
+
+  backend:
+    container_name: rustwebappbackend
+    image: rust:1.67
+    depends_on:
+      - database
+    command: sh -c "cargo run --release"
+    ports:
+      - 8000:8000
+    working_dir: /rust-webapp-demo/backend
+    volumes:
+      - ./:/rust-webapp-demo
+    environment:
+      POSTGRES_URL: postgres://postgres:postgres@rustwebappdb:5432/rust_webapp_demo
+
+  database:
+    container_name: rustwebappdb
+    image: postgres:latest
+    volumes:
+      - ./setup_db.sql:/docker-entrypoint-initdb.d/setup_db.sql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres

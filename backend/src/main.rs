@@ -8,14 +8,15 @@ mod migrator;
 extern crate rocket;
 
 use dotenv::dotenv;
+use rocket::Config;
 use sea_orm::{Database, DatabaseConnection};
 use sea_orm_migration::prelude::{MigratorTrait, SchemaManager};
-use std::env;
+use std::{env, net::Ipv4Addr};
 
 pub async fn set_up_db() -> DatabaseConnection {
     let url = match env::var("POSTGRES_URL") {
         Ok(v) => v.to_string(),
-        Err(_) => format!("Error loading env variable"),
+        Err(e) => panic!("Error getting POSTGRES_URL: {}", e),
     };
     Database::connect(url)
         .await
@@ -35,7 +36,13 @@ async fn rocket() -> _ {
     assert!(schema_manager.has_table("artist").await.unwrap());
     assert!(schema_manager.has_table("album_artist_mtm").await.unwrap());
 
-    rocket::build()
+    let config = Config {
+        port: 8000,
+        address: Ipv4Addr::new(0, 0, 0, 0).into(),
+        ..Config::default()
+    };
+
+    rocket::custom(&config)
         .manage(db)
         .mount(
             "/song",
