@@ -33,6 +33,7 @@ services:
     image: postgres:latest
     volumes:
       - ./setup_db.sql:/docker-entrypoint-initdb.d/setup_db.sql
+      - ./populate_db.sql:/docker-entrypoint-initdb.d/populate_db.sql
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
