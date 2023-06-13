@@ -69,7 +69,11 @@ Page that shows all the details related to an artist, including its attributes a
 
 ## How to run the app
 
-### Requirements
+The app can be run locally or in Docker containers with Docker Compose.
+
+### Locally
+
+#### Requirements
 
 You will need to have the following installed:
 
@@ -77,7 +81,43 @@ You will need to have the following installed:
 - [Trunk](https://trunkrs.dev/)
 - PostgreSQL
 
-1. Clone this repository
-1. Create an empty database and put its URL in the `.env` file (should be `postgres://username:password@localhost:5432/database_name`)
-1. Run the backend server with `cargo run`
-1. Run the frontend server with `trunk serve --open`
+#### Steps
+
+1. Clone this repository:
+
+```
+git clone https://github.com/SpacewaIker/rust-webapp-demo.git
+```
+
+2. Create an empty database and put its URL in the `.env` file (should be `postgres://{username}:{password}@localhost:5432/{database_name}`)
+3. Run the backend server with `rust-webapp-demo/backend$ cargo run --release`
+4. Run the frontend server with `rust-webapp-demo/frontend$ trunk serve --release --open`
+5. (Optional) Populate the database by running the `populate_db.sql` script (warning: this will first clear the database):
+
+```
+psql -U {username} -f populate_db.sql {database_name}
+```
+
+### With Docker Compose
+
+Disclaimer: This method wasn't thoroughly tested and might not work.
+
+#### Requirements
+
+Docker needs to be installed and the daemon running.
+
+#### Steps
+
+1. Clone this repository:
+
+```
+git clone https://github.com/SpacewaIker/rust-webapp-demo.git
+```
+
+2. Run the containers with:
+
+```
+rust-webapp-demo$ docker compose up
+```
+
+Note: Downloading the Rust and PostgreSQL images used in the containers and building the code might take a while.
